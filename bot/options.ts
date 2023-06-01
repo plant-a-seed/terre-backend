@@ -20,5 +20,6 @@ export default {
     telegram: {
         botToken: process.env.TELEGRAM_BOT_TOKEN as string
     },
+    debugLog: process.env.DEBUG_LOG === 'true',
     version: packageJson.version as string
 };
