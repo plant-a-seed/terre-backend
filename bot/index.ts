@@ -5,7 +5,10 @@ import { Bot } from '@/bot.js';
 
 import OPTIONS from '@/options.js';
 
-const logger = new Logger('bot');
+const logger = new Logger({
+    scope: 'main',
+    debug: OPTIONS.debugLog
+});
 
 async function createBot() {
     logger.info('Creating bot...');
