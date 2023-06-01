@@ -7,7 +7,7 @@
   "scripts": {
     "transpile:bot": "tsc -p bot",
     "transpile": "npm run transpile:bot",
-    "start": "node dist/bot",
+    "start": "node --loader esm-module-alias/loader dist/bot",
     "serve": "npm run transpile:bot && npm start",
     "lint:bot": "eslint bot --ext ts --format codeframe",
     "lint:bot:fix": "eslint bot --ext ts --format codeframe --fix",
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/plant-a-seed/terre-backend#readme",
   "aliases": {
-    "@": "."
+    "@": "./dist/bot"
   },
   "devDependencies": {
     "@euberdeveloper/eslint-plugin": "^2.5.0",
