@@ -5,7 +5,7 @@ import { Database } from '@/database.js';
 import options from '@/options.js';
 
 const logger = new Logger({
-    scope: 'bot',
+    scope: 'BOT - telegraf',
     debug: options.debugLog
 });
 

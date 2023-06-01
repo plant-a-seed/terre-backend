@@ -6,7 +6,7 @@ import { Bot } from '@/bot.js';
 import options from '@/options.js';
 
 const logger = new Logger({
-    scope: 'main',
+    scope: 'BOT - index',
     debug: options.debugLog
 });
 
