@@ -9,5 +9,5 @@ RUN npm run transpile && \
 FROM node:lts-alpine
 WORKDIR /app
 COPY --from=builder /app .
-RUN npm ci --only=prod
+RUN npm ci --omit=dev
 CMD ["npm", "start"]
