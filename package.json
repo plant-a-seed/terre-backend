@@ -5,7 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:bot": "eslint bot --ext ts --format codeframe",
+    "lint:bot:fix": "eslint bot --ext ts --format codeframe --fix",
+    "lint": "npm run lint:bot",
+    "lint:fix": "npm run lint:bot:fix"
   },
   "repository": {
     "type": "git",
