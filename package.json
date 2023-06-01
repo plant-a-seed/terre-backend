@@ -7,7 +7,7 @@
   "scripts": {
     "transpile:bot": "tsc -p bot",
     "transpile": "npm run transpile:bot",
-    "start": "node --loader esm-module-alias/loader dist/bot",
+    "start": "node --loader esm-module-alias/loader --no-warnings dist/bot",
     "serve": "npm run transpile:bot && npm start",
     "lint:bot": "eslint bot --ext ts --format codeframe",
     "lint:bot:fix": "eslint bot --ext ts --format codeframe --fix",
