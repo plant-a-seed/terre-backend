@@ -5,6 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "transpile:bot": "tsc -p bot",
+    "transpile": "npm run transpile:bot",
+    "start": "node dist/bot",
+    "serve": "npm run transpile:bot && npm start",
     "lint:bot": "eslint bot --ext ts --format codeframe",
     "lint:bot:fix": "eslint bot --ext ts --format codeframe --fix",
     "lint": "npm run lint:bot",
