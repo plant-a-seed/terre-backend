@@ -1,0 +1,19 @@
+{
+  "name": "terre-telegram-bot",
+  "version": "1.0.0",
+  "description": "The telegram bot of Terre",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/plant-a-seed/terre-backend.git"
+  },
+  "author": "Eugenio Vinicio Berretta <euberdeveloper@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/plant-a-seed/terre-backend/issues"
+  },
+  "homepage": "https://github.com/plant-a-seed/terre-backend#readme"
+}
