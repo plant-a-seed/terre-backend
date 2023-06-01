@@ -33,8 +33,7 @@ export class Database {
     public async importChats(chats: number[], overwrite = false): Promise<void> {
         if (overwrite) {
             await this.resetChats();
-        }
-        else {
+        } else {
             for (const chatId of chats) {
                 await this.pushChat(chatId);
             }

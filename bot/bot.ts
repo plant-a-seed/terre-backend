@@ -77,7 +77,9 @@ ${commandsText}`;
     }
 
     public async sendWateringNotification(bed: string, soilMoisture: number, needsWater: boolean): Promise<void> {
-        const message = `The bed <b>${bed}</b> ${needsWater ? '<b>needs</b>' : 'does <b>not</b> need'} water. The soil moisture is <b>${soilMoisture}</b>`;
+        const message = `The bed <b>${bed}</b> ${
+            needsWater ? '<b>needs</b>' : 'does <b>not</b> need'
+        } water. The soil moisture is <b>${soilMoisture}</b>`;
         await this.sendMessageToEveryone(message);
     }
 

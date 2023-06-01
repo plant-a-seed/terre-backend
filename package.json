@@ -20,9 +20,13 @@
     "url": "https://github.com/plant-a-seed/terre-backend/issues"
   },
   "homepage": "https://github.com/plant-a-seed/terre-backend#readme",
+  "aliases": {
+    "@": "."
+  },
   "devDependencies": {
-    "@euberdeveloper/eslint-plugin": "^2.3.0",
+    "@euberdeveloper/eslint-plugin": "^2.5.0",
     "@types/node": "^20.2.5",
+    "eslint": "^8.41.0",
     "typescript": "^5.1.3"
   },
   "dependencies": {
@@ -31,8 +35,5 @@
     "euberlog": "^2.5.1",
     "redis": "^4.6.7",
     "telegraf": "^4.12.2"
-  },
-  "aliases": {
-    "@": "."
   }
 }
