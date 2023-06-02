@@ -1,6 +1,6 @@
 {
   "name": "terre-telegram-bot",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "The telegram bot of Terre",
   "main": "index.js",
   "type": "module",
