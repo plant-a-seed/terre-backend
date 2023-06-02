@@ -32,7 +32,7 @@ async function main() {
         await handleWatering(body, bot);
     });
 
-    const address = await fastify.listen({ port: options.api.port });
+    const address = await fastify.listen({ port: options.api.port, host: options.api.host });
     logger.success(`Server listening on ${address}`);
 }
 // eslint-disable-next-line @typescript-eslint/no-floating-promises

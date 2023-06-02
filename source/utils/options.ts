@@ -13,7 +13,8 @@ const redisPort = process.env.REDIS_PORT ?? 6379;
 
 export default {
     api: {
-        port: process.env.API_PORT ? +process.env.API_PORT : 3000
+        port: process.env.API_PORT ? +process.env.API_PORT : 3000,
+        host: process.env.API_HOST ?? 'localhost'
     },
     redis: {
         host: redisHost,
