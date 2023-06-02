@@ -7,7 +7,9 @@
         "release": true
     },
     "npm": {
-        "publish": false
+        "publish": false,
+        "autoGenerate": true,
+        "web": true
     },
     "plugins": {
         "@release-it/conventional-changelog": {
