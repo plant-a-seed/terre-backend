@@ -4,7 +4,7 @@ COPY package*.json ./
 RUN npm install
 COPY . .
 RUN npm run transpile && \
-    rm -r bot node_modules
+    rm -r source node_modules
 
 FROM node:lts-alpine
 WORKDIR /app
