@@ -1,4 +1,5 @@
 import Fastify from 'fastify';
+import cors from '@fastify/cors';
 import { Logger } from 'euberlog';
 
 import options from '@options';
@@ -21,6 +22,7 @@ async function main() {
     const fastify = Fastify({
         logger: options.debugLog
     });
+    await fastify.register(cors);
 
     fastify.post('/moisture', { schema: moistureSchema }, async (request, reply) => {
         const body = request.body as Moisture;
