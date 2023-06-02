@@ -1,5 +1,7 @@
 
 
+## [0.2.1](https://github.com/plant-a-seed/terre-backend/compare/0.2.0...0.2.1) (2023-06-02)
+
 # 0.2.0 (2023-06-02)
 
 
