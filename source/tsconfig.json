@@ -15,8 +15,14 @@
         "paths": {
             "@/*": [
                 "./*"
+            ],
+            "@bot/*": [
+                "./bot/*"
+            ],
+            "@options": [
+                "./utils/options.js"
             ]
         },
-        "outDir": "../dist/bot"
+        "outDir": "../dist"
     }
 }

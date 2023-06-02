@@ -1,8 +1,8 @@
 import { Telegraf } from 'telegraf';
 import { Logger } from 'euberlog';
 
-import { Database } from '@/database.js';
-import options from '@/options.js';
+import options from '@options';
+import { Database } from '@bot/utils/database.js';
 
 const logger = new Logger({
     scope: 'BOT - telegraf',
