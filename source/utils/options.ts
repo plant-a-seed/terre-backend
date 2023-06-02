@@ -13,7 +13,7 @@ const redisPort = process.env.REDIS_PORT ?? 6379;
 
 export default {
     api: {
-        port: process.env.API_PORT ?? 3000
+        port: process.env.API_PORT ? +process.env.API_PORT : 3000
     },
     redis: {
         host: redisHost,
@@ -22,6 +22,9 @@ export default {
     },
     telegram: {
         botToken: process.env.TELEGRAM_BOT_TOKEN as string
+    },
+    thresholds: {
+        minMoisture: process.env.THRESHOLDS_MIN_MOISTURE ? +process.env.THRESHOLDS_MIN_MOISTURE : 0.3
     },
     debugLog: process.env.DEBUG_LOG === 'true',
     version: packageJson.version as string

@@ -21,6 +21,9 @@
             ],
             "@options": [
                 "./utils/options.js"
+            ],
+            "@types": [
+                "./utils/types.js"
             ]
         },
         "outDir": "../dist"

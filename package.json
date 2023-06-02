@@ -25,7 +25,8 @@
   "aliases": {
     "@": "./dist",
     "@bot": "./dist/bot",
-    "@options": "./dist/utils/options.js"
+    "@options": "./dist/utils/options.js",
+    "@types": "./dist/utils/types"
   },
   "devDependencies": {
     "@euberdeveloper/eslint-plugin": "^2.5.0",
