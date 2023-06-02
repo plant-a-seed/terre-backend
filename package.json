@@ -12,7 +12,8 @@
     "lint:bot": "eslint bot --ext ts --format codeframe",
     "lint:bot:fix": "eslint bot --ext ts --format codeframe --fix",
     "lint": "npm run lint:bot",
-    "lint:fix": "npm run lint:bot:fix"
+    "lint:fix": "npm run lint:bot:fix",
+    "release": "release-it"
   },
   "repository": {
     "type": "git",
@@ -29,8 +30,10 @@
   },
   "devDependencies": {
     "@euberdeveloper/eslint-plugin": "^2.5.0",
+    "@release-it/conventional-changelog": "^5.1.1",
     "@types/node": "^20.2.5",
     "eslint": "^8.41.0",
+    "release-it": "^15.10.5",
     "typescript": "^5.1.3"
   },
   "dependencies": {
