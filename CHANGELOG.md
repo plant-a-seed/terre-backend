@@ -1,5 +1,12 @@
 
 
+# [0.3.0](https://github.com/plant-a-seed/terre-backend/compare/0.2.1...0.3.0) (2023-06-02)
+
+
+### Features
+
+* **source:** add apis with telegram notification ([15b679d](https://github.com/plant-a-seed/terre-backend/commit/15b679d634df1b098294680279d8692c6fe6b138))
+
 ## [0.2.1](https://github.com/plant-a-seed/terre-backend/compare/0.2.0...0.2.1) (2023-06-02)
 
 # 0.2.0 (2023-06-02)
