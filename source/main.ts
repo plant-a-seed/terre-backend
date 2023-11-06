@@ -6,6 +6,8 @@ import options from '@options';
 import { Moisture } from '@types';
 
 import { createBot } from '@/bot/index.js';
+import { Database } from '@/bot/utils/database.js';
+
 import { moistureSchema } from '@/utils/schemas.js';
 import { handleWatering } from '@/utils/handleWatering.js';
 
@@ -15,8 +17,15 @@ const logger = new Logger({
 });
 
 async function main() {
+    logger.info(`Starting database`);
+    const database = new Database({
+        url: options.redis.url
+    });
+    await database.open();
+    logger.debug('Database instance created');
+
     logger.info(`Starting bot`);
-    const bot = await createBot();
+    const bot = createBot(database);
 
     logger.info(`Starting api`);
     const fastify = Fastify({
@@ -31,7 +40,7 @@ async function main() {
         logger.debug('Received moisture data', body);
         await reply.send();
 
-        await handleWatering(body, bot);
+        await handleWatering(body, bot, database);
     });
 
     const address = await fastify.listen({ port: options.api.port, host: options.api.host });

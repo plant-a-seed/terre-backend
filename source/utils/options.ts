@@ -25,7 +25,12 @@ export default {
         botToken: process.env.TELEGRAM_BOT_TOKEN as string
     },
     thresholds: {
-        minMoisture: process.env.THRESHOLDS_MIN_MOISTURE ? +process.env.THRESHOLDS_MIN_MOISTURE : 0.3
+        defaultMinMoisture: process.env.THRESHOLDS_DEFAULT_MIN_MOISTURE
+            ? +process.env.THRESHOLDS_DEFAULT_MIN_MOISTURE
+            : 2000,
+        maxPossibleMoisture: process.env.THRESHOLDS_MAX_POSSIBLE_MOISTURE
+            ? +process.env.THRESHOLDS_MAX_POSSIBLE_MOISTURE
+            : 8000
     },
     debugLog: process.env.DEBUG_LOG === 'true',
     version: packageJson.version as string

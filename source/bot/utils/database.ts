@@ -1,6 +1,7 @@
 import redis, { RedisClientType, RedisClientOptions } from 'redis';
 
 export class Database {
+    private static readonly MIN_MOISTURE_KEY = 'terreMinMoistureKey';
     private static readonly CHATS_KEY = 'terreChatsKey';
 
     private readonly client: RedisClientType;
@@ -11,6 +12,15 @@ export class Database {
 
     public async open(): Promise<void> {
         await this.client.connect();
+    }
+
+    public async getMinMoisture(): Promise<number | null> {
+        const min = await this.client.get(Database.MIN_MOISTURE_KEY);
+        return min ? +min : null;
+    }
+
+    public async setMinMoisture(min: number): Promise<void> {
+        await this.client.set(Database.MIN_MOISTURE_KEY, String(min));
     }
 
     public async getChats(): Promise<number[]> {

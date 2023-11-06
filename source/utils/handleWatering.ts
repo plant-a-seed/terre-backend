@@ -4,6 +4,7 @@ import options from '@options';
 import { Moisture } from '@types';
 
 import { TerreBot } from '@/bot/utils/bot.js';
+import { Database } from '@/bot/utils/database.js';
 
 const logger = new Logger({
     scope: 'handleWatering',
@@ -14,7 +15,16 @@ const state = {
     needsWatering: false
 };
 
-export async function handleWatering({ moisture, bed, timestamp }: Moisture, bot: TerreBot): Promise<void> {
+async function getHandledMoisture(database: Database): Promise<number> {
+    const min = await database.getMinMoisture();
+    return min ?? options.thresholds.defaultMinMoisture;
+}
+
+export async function handleWatering(
+    { moisture, bed, timestamp }: Moisture,
+    bot: TerreBot,
+    database: Database
+): Promise<void> {
     const parsedTimestamp = new Date(timestamp);
     if (Number.isNaN(parsedTimestamp.getTime())) {
         logger.warning('Invalid timestamp', timestamp);
@@ -29,13 +39,16 @@ export async function handleWatering({ moisture, bed, timestamp }: Moisture, bot
         return;
     }
 
-    if (moisture < options.thresholds.minMoisture && !state.needsWatering) {
-        logger.info('Needs watering', { moisture, timestamp, bed });
+    const minMoisture = await getHandledMoisture(database);
+    const handledReceivedMoisture = Math.abs(options.thresholds.maxPossibleMoisture - moisture);
+
+    if (handledReceivedMoisture < minMoisture && !state.needsWatering) {
+        logger.info('Needs watering', { handledReceivedMoisture, timestamp, bed });
         state.needsWatering = true;
-        await bot.sendWateringNotification(bed, moisture, state.needsWatering);
-    } else if (moisture >= options.thresholds.minMoisture && state.needsWatering) {
-        logger.info('Does not need watering', { moisture, timestamp, bed });
+        await bot.sendWateringNotification(bed, handledReceivedMoisture, state.needsWatering);
+    } else if (handledReceivedMoisture >= minMoisture && state.needsWatering) {
+        logger.info('Does not need watering', { handledReceivedMoisture, timestamp, bed });
         state.needsWatering = false;
-        await bot.sendWateringNotification(bed, moisture, state.needsWatering);
+        await bot.sendWateringNotification(bed, handledReceivedMoisture, state.needsWatering);
     }
 }

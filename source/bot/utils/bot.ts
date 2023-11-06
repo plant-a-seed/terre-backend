@@ -25,8 +25,10 @@ export class TerreBot {
 Commands:
 ● <b>/start</b> will register you to the notifications
 ● <b>/stop</b> will unregister you from the notifications
+● <b>/min [num]</b> will show you the min moisture or set it if you provide a number
 ● <b>/version</b> will show you the bot version
 ● <b>/help</b> will show you this message again
+
         `;
 
         const helpText = `${welcomeText}
@@ -42,6 +44,20 @@ ${commandsText}`;
             logger.debug('Start command', ctx.chat);
             await this.database.pushChat(ctx.chat.id);
             return ctx.reply(startText, { parse_mode: 'HTML' });
+        });
+        this.bot.command('min', async ctx => {
+            logger.debug('Min', ctx.chat);
+            const match = ctx.match.match(/^\s*(-?\d+)\s*$/);
+            if (!match) {
+                const min = await this.database.getMinMoisture();
+                return ctx.reply(`The min moisture is ${min ?? 'not set'}`);
+            } else {
+                const min = +match[1];
+                if (min < 0 || min > options.thresholds.maxPossibleMoisture)
+                    return ctx.reply('The min moisture must be between 0 and 8000');
+                await this.database.setMinMoisture(min);
+                return ctx.reply(`The min moisture is now ${min}`);
+            }
         });
         this.bot.command('stop', async ctx => {
             logger.debug('Stop command', ctx.chat);
@@ -59,7 +75,18 @@ ${commandsText}`;
             logger.debug('Help command', ctx.chat);
             return ctx.reply(helpText, { parse_mode: 'HTML' });
         });
-        void this.bot.start();
+        this.bot.api.setMyCommands([
+            { command: 'start', description: 'Register you to the notifications' },
+            { command: 'stop', description: 'Unregister you from the notifications' },
+            { command: 'min', description: 'Show you the min moisture or set it if you provide a number' },
+            { command: 'version', description: 'Show you the bot version' },
+            { command: 'help', description: 'Show you this message again' }
+        ]);
+        void this.bot.start({
+            onStart(botInfo) {
+                logger.info(`Bot started with info`, botInfo);
+            }
+        });
     }
 
     private async sendMessageToChat(message: string, chatId: number): Promise<void> {
