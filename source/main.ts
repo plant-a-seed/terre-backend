@@ -25,7 +25,7 @@ async function main() {
     logger.debug('Database instance created');
 
     logger.info(`Starting bot`);
-    const bot = createBot(database);
+    const bot = await createBot(database);
 
     logger.info(`Starting api`);
     const fastify = Fastify({

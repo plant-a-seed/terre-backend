@@ -10,10 +10,11 @@ const logger = new Logger({
     debug: options.debugLog
 });
 
-export function createBot(database: Database): TerreBot {
+export async function createBot(database: Database): Promise<TerreBot> {
     logger.info('Creating bot...');
 
     const bot = new TerreBot(options.telegram.botToken, database);
+    await bot.init();
     logger.success('Bot instance created!');
 
     return bot;

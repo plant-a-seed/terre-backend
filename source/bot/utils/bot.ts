@@ -16,10 +16,9 @@ export class TerreBot {
     constructor(botToken: string, database: Database) {
         this.database = database;
         this.bot = new Bot(botToken);
-        this.init();
     }
 
-    private init(): void {
+    public async init(): Promise<void> {
         const welcomeText = `Welcome, I am Terrebot, the bot that will notify you if one of the beds of PaS needs water!`;
         const commandsText = `
 Commands:
@@ -47,7 +46,7 @@ ${commandsText}`;
         });
         this.bot.command('min', async ctx => {
             logger.debug('Min', ctx.chat);
-            const match = ctx.match.match(/^\s*(-?\d+)\s*$/);
+            const match = /^\s*(-?\d+)\s*$/.exec(ctx.match);
             if (!match) {
                 const min = await this.database.getMinMoisture();
                 return ctx.reply(`The min moisture is ${min ?? 'not set'}`);
@@ -67,15 +66,15 @@ ${commandsText}`;
                 { parse_mode: 'HTML' }
             );
         });
-        this.bot.command('version', ctx => {
+        this.bot.command('version', async ctx => {
             logger.debug('Version command', ctx.chat);
             return ctx.reply(`The version of this bot is <b>${options.version}</b>`, { parse_mode: 'HTML' });
         });
-        this.bot.command('help', ctx => {
+        this.bot.command('help', async ctx => {
             logger.debug('Help command', ctx.chat);
             return ctx.reply(helpText, { parse_mode: 'HTML' });
         });
-        this.bot.api.setMyCommands([
+        await this.bot.api.setMyCommands([
             { command: 'start', description: 'Register you to the notifications' },
             { command: 'stop', description: 'Unregister you from the notifications' },
             { command: 'min', description: 'Show you the min moisture or set it if you provide a number' },
@@ -110,7 +109,7 @@ ${commandsText}`;
         await this.sendMessageToEveryone(message);
     }
 
-    public close(): void {
-        this.bot.stop();
+    public async close(): Promise<void> {
+        return await this.bot.stop();
     }
 }
