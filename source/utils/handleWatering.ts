@@ -20,14 +20,14 @@ export async function handleWatering({ moisture, bed, timestamp }: Moisture, bot
         logger.warning('Invalid timestamp', timestamp);
         return;
     }
-    if (parsedTimestamp.getTime() > Date.now()) {
-        logger.warning('Timestamp in the future', timestamp);
-        return;
-    }
-    if (parsedTimestamp.getTime() < Date.now() - 3_600_000) {
-        logger.warning('Timestamp too old', timestamp);
-        return;
-    }
+    // if (parsedTimestamp.getTime() > Date.now()) {
+    //     logger.warning('Timestamp in the future', timestamp);
+    //     return;
+    // }
+    // if (parsedTimestamp.getTime() < Date.now() - 3_600_000) {
+    //     logger.warning('Timestamp too old', timestamp);
+    //     return;
+    // }
 
     if (moisture < options.thresholds.minMoisture && !state.needsWatering) {
         logger.info('Needs watering', { moisture, timestamp, bed });
