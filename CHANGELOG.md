@@ -1,5 +1,18 @@
 
 
+# [0.4.0](https://github.com/plant-a-seed/terre-backend/compare/0.3.0...0.4.0) (2023-11-06)
+
+
+### Bug Fixes
+
+* **source:** add cors ([2f4c4f4](https://github.com/plant-a-seed/terre-backend/commit/2f4c4f44776e048c2b3e72c5adc262a8bdfe2b23))
+
+
+### Features
+
+* make it possible to set min moisture from bot ([29dd08a](https://github.com/plant-a-seed/terre-backend/commit/29dd08aacb341a850a38f12e40253c446a3278f5))
+* **source:** parametrize 17 ([0590393](https://github.com/plant-a-seed/terre-backend/commit/0590393a3e04c098b76e1893825cbc0b8c023213))
+
 # [0.3.0](https://github.com/plant-a-seed/terre-backend/compare/0.2.1...0.3.0) (2023-06-02)
 
 
