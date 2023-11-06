@@ -26,6 +26,8 @@ async function main() {
 
     fastify.post('/moisture', { schema: moistureSchema }, async (request, reply) => {
         const body = request.body as Moisture;
+        // TODO: remove for when sent from ESP32
+        body.timestamp = Date.now();
         logger.debug('Received moisture data', body);
         await reply.send();
 
