@@ -3,7 +3,7 @@ import { Logger } from 'euberlog';
 import options from '@options';
 import { Moisture } from '@types';
 
-import { Bot } from '@/bot/utils/bot.js';
+import { TerreBot } from '@/bot/utils/bot.js';
 
 const logger = new Logger({
     scope: 'handleWatering',
@@ -14,7 +14,7 @@ const state = {
     needsWatering: false
 };
 
-export async function handleWatering({ moisture, bed, timestamp }: Moisture, bot: Bot): Promise<void> {
+export async function handleWatering({ moisture, bed, timestamp }: Moisture, bot: TerreBot): Promise<void> {
     const parsedTimestamp = new Date(timestamp);
     if (Number.isNaN(parsedTimestamp.getTime())) {
         logger.warning('Invalid timestamp', timestamp);

@@ -1,4 +1,4 @@
-import { Telegraf } from 'telegraf';
+import { Bot } from 'grammy';
 import { Logger } from 'euberlog';
 
 import options from '@options';
@@ -9,13 +9,13 @@ const logger = new Logger({
     debug: options.debugLog
 });
 
-export class Bot {
-    private readonly bot: Telegraf;
+export class TerreBot {
+    private readonly bot: Bot;
     private readonly database: Database;
 
     constructor(botToken: string, database: Database) {
         this.database = database;
-        this.bot = new Telegraf(botToken);
+        this.bot = new Bot(botToken);
         this.init();
     }
 
@@ -38,7 +38,7 @@ You have just been registered to the newsletter.
 
 ${commandsText}`;
 
-        this.bot.start(async ctx => {
+        this.bot.command('start', async ctx => {
             logger.debug('Start command', ctx.chat);
             await this.database.pushChat(ctx.chat.id);
             return ctx.reply(startText, { parse_mode: 'HTML' });
@@ -51,20 +51,20 @@ ${commandsText}`;
                 { parse_mode: 'HTML' }
             );
         });
-        this.bot.command('version', async ctx => {
+        this.bot.command('version', ctx => {
             logger.debug('Version command', ctx.chat);
             return ctx.reply(`The version of this bot is <b>${options.version}</b>`, { parse_mode: 'HTML' });
         });
-        this.bot.help(async ctx => {
+        this.bot.command('help', ctx => {
             logger.debug('Help command', ctx.chat);
             return ctx.reply(helpText, { parse_mode: 'HTML' });
         });
-        void this.bot.launch();
+        void this.bot.start();
     }
 
     private async sendMessageToChat(message: string, chatId: number): Promise<void> {
         try {
-            await this.bot.telegram.sendMessage(chatId, message, { parse_mode: 'HTML' });
+            await this.bot.api.sendMessage(chatId, message, { parse_mode: 'HTML' });
         } catch (error) {
             logger.error(`Error sending message to chat ${chatId}`, error);
         }
